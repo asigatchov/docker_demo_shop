@@ -1,0 +1,7 @@
+development:
+  address: sphinx
+  mysql41: 9306
+
+production:
+  address: sphinx
+  mysql41: 9306

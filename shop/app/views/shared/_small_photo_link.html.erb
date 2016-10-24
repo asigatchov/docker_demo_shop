@@ -1,0 +1,7 @@
+    <div class="prevphoto">
+    <a href="<%= seo_photo_cars_path({:brand_name => photo.brand_name_url, :model_name => photo.model_name_url, :id => photo.id } )  %>/">  
+      <div class="pic">
+    <%= image_tag "http://more-cars.ru/auto/#{photo.brand_id}/#{photo.model_id}/___#{photo.id}.jpg", :title =>"#{photo.brand.name} #{photo.model.name}" , :alt =>"#{photo.brand.name} #{photo.model.name}", :style=> 'width:100px'  %>
+      </div></a><br>
+      <%= link_to "#{photo.brand_name} #{photo.model_name}", seo_photo_cars_path({:brand_name => photo.brand_name_url, :model_name => photo.model_name_url, :id => photo.id } ) + '/'  %>
+    </div>

@@ -1,0 +1,6 @@
+<% if @category %>
+<%= render :partial => 'myshop/bread', :locals =>{:name=> @category.name} %>
+<% end %>
+<h1><%= @category ?  @category.name : @h1_title %></h1>
+<%= render  partial: 'myshop/products', formats: :html %>
+

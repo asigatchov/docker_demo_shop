@@ -1,0 +1,51 @@
+
+<div style="text-align:center;"><%= will_paginate(@products )  %></div><br>
+<%
+ @products.to_a.map.each_with_index do |item,i| %>
+<% if false %>
+<div class="product_item">
+ <%= image_tag item.picture.gsub('product/2','product/1'), :title=> item.name + " Купить с доставной", :alt => item.name + " Купить с доставкой" %><br>
+ <%= link_to item.name, myshop_product_translit_path(  :id => item.id) %>
+ <br/>
+ <%= item.description.truncate(35, sepatator:' ') %>
+ <br>
+<b>Цена: <%= item.price %> руб.</b>
+ <br>
+ категория <%= link_to item.category.name, myshop_category_translit_path(:category_id => item.categoryId) %>
+<% end %>
+<div class="product_box">
+
+<%= link_to item.name, myshop_product_translit_path(  :id => item.id), :class => :h1 %>
+<div class="crop">
+<% if !item.picture.blank? %>
+<a href="<%=myshop_product_translit_path( :id => item.id)%>"><%= image_tag item.picture.gsub('product/2','product/1'), :title=> item.name + " Купить с доставной", :alt => item.name + " Купить с доставкой" %></a><br>
+<% end %>
+</div>
+<div class="product_info">
+<p> 
+<%= item.description.truncate(70, sepatator:' ') %>
+</p>
+<div class="h3"><%= item.price %> руб.</div>
+</div>
+
+
+<% if item.availabilityCode? %>
+<%= render partial: 'myshop/button_buy_my_shop.html', formats: [:html] , locals: {item_id: item.id, price: item.price} %>
+<% end %>
+<div class="detail_button">
+ <%= link_to 'Подробнее', myshop_product_translit_path(  :id => item.id) %>
+</div>
+<div class="cleaner">&nbsp;</div>
+</div>
+<% if (i % 2) == 0  %>
+<div class="cleaner_with_width">&nbsp;</div>
+<% else %>
+<div class="cleaner_with_height">&nbsp;</div>
+<% end %>
+
+<% end if @products  %>
+
+
+
+<div style="text-align:center;"><%= will_paginate(@products )  %></div>
+<br><br>

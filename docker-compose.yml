@@ -1,0 +1,41 @@
+version: '2'
+services:
+  db.shop:
+    image: mysql:5.7.14
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./shop/config/my.cnf:/etc/mysql/my.cnf
+    environment:
+      SERVICE_NAME: db.shop
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: my_shop_ru
+      MYSQL_USER: myshop
+      MYSQL_PASSWORD: shopmyru
+    ports:
+      - '3306'
+
+  shop.service.dev:
+    build: ./shop/
+    environment:
+      SERVICE_NAME: shop
+      DB_HOST: db.shop
+      DB_NAME: my_shop_ru
+      DB_USER: myshop
+      DB_PASS: shopmyru
+    volumes:
+      - ./shop/:/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db.shop
+  sphinx:
+    image: asigatchov/sphinx:2.2.11
+    depends_on:
+      - db.shop
+    volumes:
+      - ./data/sphinx/data:/app/db/sphinx/development
+      - ./data/sphinx/log:/app/log/
+      - ./data/sphinx/binlog:/app/tmp/binlog/
+      - ./data/sphinx/tmp:/app/tmp/
+      - ./data/sphinx/tmp/binlog:/app/tmp/binlog/development
+      - ./shop/config/development.sphinx.conf:/etc/sphinxsearch/sphinx.conf

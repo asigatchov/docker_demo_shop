@@ -1,0 +1,9 @@
+<div class="buy_now_button">
+<form name="cart" method="post" id="product_<%=item_id %>" action="http://my-shop.ru/my/cart">
+<input type="hidden" name="partner" value="6000">
+<input type="hidden" name="id" value="<%= item_id %>">
+<input type="hidden" name="quantity" value="1">
+<input type="hidden" name="send" value="Купить My-Shop.ru">
+</form>
+<a href="#" onclick="yaCounter23604988.reachGoal('ORDER',   {price: <%= price %>}); $('#product_<%= item_id %>').submit(); return false" >Купить</a>
+</div>

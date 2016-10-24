@@ -1,0 +1,9 @@
+<% if @parent_all %>
+<div class="bread">
+<a href="/">Главная</a> >>
+<% @parent_all.each do |c| %>
+      <span><%= link_to c.name, myshop_category_translit_path( :category_id => c.id) %> >> </span>
+<% end %>
+<%= name %>
+</div>
+<% end %>

@@ -1,0 +1,12 @@
+
+div.product_item {
+ width: 240px;
+ height: 350px;
+ float:left;
+ padding:2px;
+}
+
+form.form_search {
+ border:1px solid red;
+
+}

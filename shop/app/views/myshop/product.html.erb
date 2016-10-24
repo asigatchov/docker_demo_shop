@@ -1,0 +1,91 @@
+<%= render :partial => 'myshop/bread', :locals =>{:name=> @product.name} %>
+<h1><%=@product.name %> за <%= @product.price %>руб.</h1>
+<div class="product">
+
+
+<div style="float:left;;width:350px">
+ <%= @product.description.gsub("\n","<br/>").html_safe %>
+</div>
+
+<div  class="img_goods">
+<% if !@product.picture.blank? %>
+ <%= image_tag @product.picture, :title=> "#{@product.name}  Купить с доставной за #{@product.price}", :alt =>"#{ @product.name }  Купить с доставкой #{@product.price}", :class => 'img_goods' %><br>
+<br>
+<% if @product.availabilityCode? %>
+<div class="price">
+<b>Цена:</b> <%= @product.price %> руб.
+</div>
+<%= render partial: 'myshop/button_buy_my_shop.html', formats: [:html] , locals: {item_id: @product.id, price: @product.price} %>
+<br style="clear:both"/>
+<% else %>
+<b>Товара нет на складе.</b> Предлагаем Вам аналоги <i><%= @product.name %></i>
+<% end %>
+<% end %>
+
+</div>
+
+
+<% if false %>
+ <br>
+
+<div style="float:right;width:250px">
+
+
+</div>
+
+<br>
+<br>
+
+<% end %>
+
+<br style="clear:both"/>
+<% if @product.book == 'Y' %>
+<div class="warn">
+Внимание: Мы против пиратсва. На нашем сайте нельзя скачать книгу <%= @product.name %>. 
+</div>
+<% end %>
+
+
+<div class="recommend">
+<% recommend = @product.recommendation(params[:id]).limit(6) %>
+<% if recommend.size > 0 %>
+<h4>Популярные товары</h4>
+<% end %>
+<% recommend.each_with_index do |item,i| %>
+
+<div class="product_box">
+
+ <%= link_to item.name, myshop_product_translit_path(:id => item.id), :class => :h1 %>
+
+<% if !item.picture.blank? %>
+  <a href="<%=myshop_product_translit_path(:id => item.id)%>"><%= image_tag item.picture.gsub('product/2','product/1'), :title=> item.name + " Купить с доставной", :alt => item.name + " Купить с доставкой" %></a><br>
+<% end %>
+<div class="product_info">
+<p> 
+<%= item.description.truncate(70, sepatator:' ') %>
+</p>
+<div class="h3"><%= item.price %> руб.</div>
+</div>
+<%= render partial: 'myshop/button_buy_my_shop.html', formats: [:html] , locals: {item_id: item.id, price:  item.price} %>
+<div class="detail_button">
+ <%= link_to 'Подробнее', myshop_product_translit_path(  :id => item.id) %>
+</div>
+<div class="cleaner">&nbsp;</div>
+</div>
+<% if (i % 2) == 0  %>
+<div class="cleaner_with_width">&nbsp;</div>
+<% else %>
+<div class="cleaner_with_height">&nbsp;</div>
+<% end %>
+
+<% if false %> 
+<div class="product_item">
+ <%= image_tag item.picture.gsub('product/2','product/1'), :title=> item.name + " Купить с доставной", :alt => item.name + " Купить с доставкой" %><br>
+ <%= link_to item.name, myshop_product_translit_path(:id => item.id) %>
+ <br/>
+ <br>
+<b>Цена: <%= item.price %> руб.</b>
+</div>
+<% end %>
+<% end %>
+</div>

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><%= ( @seo_title || @page_title || 'Интернет магазин').to_s %></title>
+<meta name="keywords" content="<%= @seo_keysword || @seo_title %>" />
+<meta name="description" content="<%= @seo_desc %>" />
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+<link href="/myshop/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="container">
+	<div id="menu">
+    	<ul>
+            <li><a href="/" class="current">Главная</a></li>
+            <li><a href="/">Поиск</a></li>
+            <li><a href="/knigi/category_3">Книги</a></li>            
+            <li><a href="#">Новинки</a></li>  
+            <li><a href="#">Обратная связь</a></li>
+    	</ul>
+ <%= form_tag("/search", method: "get", class: :form_search) do %>
+  <%= label_tag(:s, "поиск:") %>
+  <%= text_field_tag(:s, params[:s]||'') %>
+  <%= submit_tag("Найти!", :name => nil) %>
+<% end %>
+    </div> <!-- end of menu -->
+    
+    <div id="header">
+    	<div id="special_offers">
+<div style="width:320px;height:100px;">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 320x100_shop_top -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:320px;height:100px"
+     data-ad-client="ca-pub-4993179678182236"
+     data-ad-slot="4808731119"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+        </div>
+    </div> <!-- end of header -->
+    
+    <div id="content">
+    	
+        <div id="content_left">
+
+
+<% if @category && @category.sub_categories.size > 0 %>
+			<div class="content_left_section">
+            	<div class="h1">Подкатегории</div>
+                <ul>
+<% @category.sub_categories.each do |item| %>
+ <li>
+  <%= link_to item.name , myshop_category_translit_path(item.id) %>
+ </li>
+<% end %>
+            	</ul>
+            </div>
+<% end %>            
+
+        	<div class="content_left_section">
+            	<div class="h1">Категории</div>
+                <ul>
+<% @categories.map.each do |item| %>
+ <li><%= link_to item.name, myshop_category_translit_path( :category_id => item.id) %></li>
+<% end %>
+            	</ul>
+            </div>
+        </div> <!-- end of content left -->
+        <div id="content_right">
+<%= yield %>
+
+
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- shop.fkis.ru -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:580px;height:400px"
+     data-ad-client="ca-pub-4993179678182236"
+     data-ad-slot="2224246712"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+           
+        </div> <!-- end of content right -->
+    
+    	<div class="cleaner_with_height">&nbsp;</div>
+    </div> <!-- end of content -->
+    
+    <div id="footer">
+    
+	       <a href="/">Главная</a> | <a href="/">Поиск</a> | <a href="/knigi/category_3">Книги</a>| <a href="#">FAQs</a> | <a href="#">Контакты</a><br />
+        Copyright © 2013 <a href="#"><strong>shop.fkis.ru</strong></a> 
+    <!-- end of footer -->
+</div> <!-- end of container -->
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter39826340 = new Ya.Metrika({
+                    id:39826340,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    trackHash:true,
+                    ecommerce:"dataLayer"
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/39826340" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+
+</body>
+</html>

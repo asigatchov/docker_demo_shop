@@ -1,0 +1,15 @@
+
+<div class="category">
+<ul>
+<% @categories.map.each do |item| %>
+ <li><%= link_to item.name, myshop_category_translit_path(  :category_id => item.id), :class => :h1 %>
+  <ul>
+  <% item.sub_categories.each do | item2| %>
+        <li><%= link_to item2.name, myshop_category_translit_path(  :category_id => item2.id) %>
+	  </li>
+  <% end %>
+  </ul>
+ </li>
+<% end %>
+</ul>
+</div>
