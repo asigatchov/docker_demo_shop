@@ -1,6 +1,6 @@
 # docker_demo_shop
 
-Статья оп запуска приложения с описанием http://сигачев.рф/posts/81
+Статья оп запуска приложения с описанием http://xn--80aebjm7c4b.xn--p1ai/posts/81
 
 Для работы установите docker(https://docs.docker.com/engine/installation/linux/ubuntulinux/)  и docker-compose (https://docs.docker.com/compose/install/)
 
